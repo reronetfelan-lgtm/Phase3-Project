@@ -109,6 +109,29 @@ Other Features:     <6%  (negligible)
 - May violate fair policing standards
 - **Recommendation**: Fairness audit required before deployment
 
+### 7. **Graph Explanations & Visualizations**
+
+#### EDA Graphs
+- **Arrest Flag Distribution**: Bar and pie charts show absolute counts and percentages of stops that resulted in an arrest. Use the bar for volumes and the pie for proportion comparison.
+- **Subject Demographics Overview** (Age / Race / Gender / Weapon): Bar and pie plots summarize the composition of stops by age group, perceived race, subject gender, and top recorded weapon types; useful to identify dominant groups and sample sizes.
+- **Arrest Rates by Demographics** (Age / Race / Gender / Weapon): Panels plot arrest rate (%) per group with an average line. Groups above the average have higher arrest likelihood; check annotated sample sizes (n) for reliability.
+- **Arrest Rates by Subject Race**: Ranked bar chart of arrest rate by race; interpret high rates in small groups cautiously due to low counts.
+- **Frisk & Arrest by Gender**: Side-by-side plots compare frisk frequency by officer gender and arrest rates by subject gender to surface potential procedural differences.
+- **Arrest Trends Over Years**: Line chart (and combined bar+line) shows how arrest rates evolve over time; compare rate changes against total stop volume to separate volume effects.
+- **Arrest Rates by Precinct**: Bar chart highlights precincts with high/low arrest rates; scatter plots total stops vs. arrest rate to find precincts with unusual profiles (high rate and high volume merit attention).
+- **Age Distribution**: Histogram of estimated numeric ages derived from age groups to show concentration of stops by age.
+- **Race vs Gender Heatmap**: Heatmap shows arrest rate (%) at the intersection of perceived race and subject gender—useful for identifying intersectional disparities.
+
+#### Model Evaluation Graphs
+- **Confusion Matrices** (Count & Normalized): Show counts and percentages of true/false positives and true/false negatives; use normalized view for rate perspective.
+- **ROC Curves**: Plot true positive rate vs. false positive rate; compare models' discriminative ability; higher curves indicate better separation.
+- **PR Curves** (Precision-Recall): Especially valuable for imbalanced data; compare precision-recall trade-off across models; use PR-AUC score to rank models.
+- **Feature Importance**: Bar plots from tree-based models and linear coefficients from logistic regression; show which variables drive arrest predictions (higher = more important).
+- **Learning Curves**: Plot training and validation scores across increasing data sizes; reveal overfitting/underfitting and data efficiency; converging curves indicate well-tuned models.
+- **Model Comparison Charts**: Ranked bar charts and scatter plots comparing accuracy, ROC-AUC, precision, recall, and F1-scores across all 9 models to identify the best performer.
+
+**Interpretation Tips**: Always consider both rate and sample size; small groups can give unstable rates. For model graphs, prioritize PR curves and PR-AUC when arrests are relatively rare (11.83%). Watch for learning curves that plateau (data-inefficient) vs. steadily improving (more data helps).
+
 ---
 
 ## 🔧 Technical Stack
@@ -122,19 +145,17 @@ Other Features:     <6%  (negligible)
 
 ---
 
-## 📊 Notebook Structure
+## 📊 Notebook Structure (54+ Cells)
 
-| Cell Range | Analysis | Status |
-|------|----------|--------|
-| 1-10 | Data Loading & Cleaning | ✅ Complete |
-| 11-30 | Exploratory Data Analysis (EDA) | ✅ Complete |
-| 31-45 | Hypothesis Testing & Visualizations | ✅ Complete |
-| 46-56 | Model Training (9 models) | ✅ Complete |
-| 47-49 | Precision-Recall & Feature Importance | ✅ Complete |
-| 50-51 | Learning Curves & Model Profiles | ✅ Complete |
-| 52 | Gradient Boosting Deployment Guide | ✅ Complete |
-| 53 | Bias-Variance Analysis | ✅ Complete |
-| 54 | Training vs Testing Accuracy | ✅ Complete |
+1. **Data Loading & Cleaning** – Load CSV, handle missing values, encode categoricals, validate data
+2. **EDA (8+ visualizations)** – Demographics, arrest distributions, trends by age/race/gender/precinct, heatmaps
+3. **Hypothesis Testing** – Chi-square (race, frisk), t-test (officer age) with statistical significance
+4. **Model Training (9 models)** – LR, RF, GB, DT, SVM, KNN, NB, AdaBoost, Neural Network
+5. **Model Evaluation** – Confusion matrices, ROC/PR curves, accuracy, precision, recall, F1, AUC
+6. **Feature Importance** – Consensus across GB, RF, DT; coefficients for LR
+7. **Learning Curves** – Convergence, overfitting/underfitting, data efficiency
+8. **Comprehensive Comparisons** – All 9 models ranked by ROC-AUC, PR-AUC, F1; train/test accuracy gaps
+9. **Bias-Variance Analysis** – Overfitting diagnosis, model stability, error decomposition
 
 ---
 
