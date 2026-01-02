@@ -47,24 +47,13 @@ This project analyzes **65,896 traffic stops** (59,892 after cleaning) to unders
 | Model | ROC-AUC | Recall | Precision | F1 | Status |
 |-------|---------|--------|-----------|----|----|
 | **Gradient Boosting** | 69.37% | 46.65% | 22.23% | 30.11% | ✅ RECOMMENDED |
-| **AdaBoost** | 68.71% | 46.88% | 22.05% | 29.79% | ✅ BACKUP |
 
 ### Tier 2: Good but Limited
 | Model | ROC-AUC | Status |
 |-------|---------|--------|
-| Neural Network (MLP) | 68.50% | Consider for ensembles |
-| Random Forest | 64.18% | Data-hungry, still improving |
 | Logistic Regression | 66.20% | Limited potential, underfitting |
 | Decision Tree | 59.83% | High overfitting (gap: -7.51%) |
 
-### Tier 3: Not Recommended
-| Model | ROC-AUC | Issue |
-|-------|---------|-------|
-| Naive Bayes | 54.51% | Naive assumption fails on imbalanced data |
-| K-Nearest Neighbors | 53.96% | Performs poorly on imbalanced data |
-| SVM | 50.19% | Complete failure (worse than random) |
-
----
 
 ## 📈 Analysis Highlights
 
@@ -97,8 +86,6 @@ Other Features:     <6%  (negligible)
 | LR | Early plateau | ❌ Limited potential | Data inefficient |
 
 ### 5. **Bias-Variance Decomposition**
-- **GB**: Balanced bias-variance tradeoff (moderate overfitting converges)
-- **Ada**: Lowest variance across all models (most stable)
 - **Decision Tree**: High variance (memorization problem)
 - **LR**: High bias (underfitting on complex patterns)
 
@@ -154,10 +141,7 @@ Other Features:     <6%  (negligible)
 5. **Model Evaluation** – Confusion matrices, ROC/PR curves, accuracy, precision, recall, F1, AUC
 6. **Feature Importance** – Consensus across GB, RF, DT; coefficients for LR
 7. **Learning Curves** – Convergence, overfitting/underfitting, data efficiency
-8. **Comprehensive Comparisons** – All 9 models ranked by ROC-AUC, PR-AUC, F1; train/test accuracy gaps
-9. **Bias-Variance Analysis** – Overfitting diagnosis, model stability, error decomposition
-
----
+8. **Bias-Variance Analysis** – Overfitting diagnosis, model stability, error decomposition
 
 ## 🎯 Usage
 
@@ -168,7 +152,7 @@ Other Features:     <6%  (negligible)
    - `gb_model`: Trained Gradient Boosting classifier
    - `metrics_master_df`: All model metrics comparison
    - `train_test_df`: Training vs testing accuracy comparison
-   - Model objects: `lr_model, rf_model, dt_model, svm_model, knn_model, nb_model, ada_model, nn_model`
+   - Model objects: `lr_model, rf_model
 
 3. **Make predictions**:
 ```python
@@ -228,27 +212,14 @@ jupyter notebook index.ipynb
 ```
 Model                Accuracy  Precision  Recall  F1-Score  ROC-AUC  PR-AUC
 Gradient Boosting    88.17%    22.23%     46.65%  30.11%    69.37%   22.14%
-AdaBoost             88.17%    22.05%     46.88%  29.79%    68.71%   22.37%
-Neural Network       88.17%    21.94%     47.17%  30.14%    68.50%   20.56%
-Random Forest        88.12%    21.87%     44.59%  29.60%    64.18%   19.82%
 Logistic Regression  88.17%    21.85%     44.37%  29.50%    66.20%   18.91%
 Decision Tree        87.41%    20.58%     32.77%  25.18%    59.83%   17.29%
-Naive Bayes          88.05%    20.69%     28.14%  23.81%    54.51%   16.56%
-K-Nearest Neighbors  86.99%    18.66%     24.08%  21.03%    53.96%   14.90%
-SVM                  88.17%    16.71%     5.73%   8.52%     50.19%   11.91%
-```
 
 ### Overfitting Analysis (Accuracy Gap: Train - Test)
 ```
 Model                Train-Test Gap  Status
-Neural Network       +0.0006        ✅ Excellent generalization
-AdaBoost             0.0000         ✅ Perfect balance
-Naive Bayes          0.0000         ✅ Simple model
-K-Nearest Neighbors  +0.0055        ⚠️ Minor overfitting
-Random Forest        +0.0055        ⚠️ Minor overfitting
 Logistic Regression  ~0.0000        Neutral
 Gradient Boosting    -0.0103        ✅ Better on test (robust!)
-SVM                  ~0.0000        Neutral
 Decision Tree        -0.0751        ❌ Severe overfitting
 ```
 
@@ -319,11 +290,5 @@ Felix Kipkurui | Data Analysis & ML | December 2025
 Publicly available Seattle Terry Stops data. Use responsibly and ethically.
 
 ---
-
-## ✅ Project Status
-
-**Analysis**: ✅ Complete (54 cells, 66 executions)  
-**Models**: ✅ 9 models trained & evaluated  
-**README**: ✅ Comprehensive documentation  
-**GitHub**: ✅ Ready to push  
+## Conclusion 
 
